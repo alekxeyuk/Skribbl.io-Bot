@@ -40,7 +40,7 @@ You can always change settings:
 
 ```python
 # App settings
-SETTINGS = {'port': '5002', 'join': '', 'language': 'English'}
+SETTINGS = {'port': '5002', 'join': '', 'language': 'English', 'x': 3, 'y': 4, 'shuffle': True}
 # Connect user settings
 await sio.emit('userData' , {"name": "­", "code":"", "avatar": [-1, -1, -1, -1], "join": SETTINGS['join'], "language": SETTINGS['language'], "createPrivate": False})
 # Google search settings
