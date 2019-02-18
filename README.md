@@ -63,4 +63,4 @@ Also because of how socketio work, if you want your bot to auto-reconnect you ca
 `This code is published for educational purposes ONLY, I have no responsibility for how this code will be used, all responsibility lies on YOU. Please just don't be a FREAK. gl hf`
 
 ## License
-[MIT](https://github.com/DEgiTx/rats-search/blob/master/LICENSE)
+[MIT](https://github.com/alekxeyuk/Skribbl.io-Bot/blob/master/LICENSE)
