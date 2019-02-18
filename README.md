@@ -5,6 +5,7 @@
 My try at creating fully automated game bot.
 
 ## Features
+* Asynchronous, event based code style
 * Line optimization for faster drawing
 * Supports two different dither algos
 * Easy image size control
