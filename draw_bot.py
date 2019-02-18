@@ -7,11 +7,11 @@ import socketio
 import requests
 import hitherdither
 from io import BytesIO
-from random import choice, randint
+from random import choice, randint, shuffle
 from PIL import Image, ImageDraw, ImageFont
 import google_images_download
 
-SETTINGS = {'port': '5002', 'join': '', 'language': 'English'}
+SETTINGS = {'port': '5002', 'join': '', 'language': 'English', 'x': 3, 'y': 4, 'shuffle': True}
 
 if len(sys.argv) == 2:
     """
@@ -49,8 +49,8 @@ async def dither(word):
     arguments = {"keywords": word, "limit":10, "print_urls":False, 'no_download':True, 'safe_search':True, 'exact_size':'200,200', 'type': 'clipart', 'format': 'jpg'}   #creating list of arguments
     for link in response.download(arguments):  
         try:
-            with Image.open(BytesIO(requests.get(link).content)) as img:
-                img = img.resize((int(150), int(120)))                                                              # Here you can change end size of image, but don't forget to also change pixel draw size in parent function
+            with Image.open(BytesIO(requests.get(link, timeout = 5).content)) as img:
+                img = img.resize((int(200), int(150)))                                                              # Here you can change end size of image, but don't forget to also change pixel draw size in parent function
                 print(img.size)
                 img_dithered = hitherdither.ordered.cluster.cluster_dot_dithering(img, palette, [1, 1, 1], 4)       # Here you can change dither algo, yliluoma is much much better in quality but it is very very slow
                 #img_dithered = hitherdither.ordered.yliluoma.yliluomas_1_ordered_dithering(img, palette, order=8)
@@ -88,7 +88,7 @@ async def on_lobbyConnected(data):
     """
     Here u can send your welcoming message to the chat, a max of 100 characters per line, u can however use anything, emojis or even special characters
     """
-    await sio.emit("chat", "Hello, I’m an auto-drawing bot written in Python + Websockets, I can draw 150x120 image's in ~ 5-30")
+    await sio.emit("chat", "Hello, I’m an auto-drawing bot written in Python + Websockets, I can draw 200x150 image's in ~ 5-30")
     await sio.emit("chat", "seconds, so please be patient. My owner is user 'HALL V2'")
     await sio.emit("chat", "If you want this bot, it is released on github,com/alekxeyuk/Skribbl,io-Bot")
 
@@ -224,8 +224,10 @@ def image_optimize(img, x_size, y_size):
     Depending on the size of the operations, we choose what will be more efficient to draw
     """
     if x > y:
+        shuffle(draw_data_y) if SETTINGS['shuffle'] else False
         return draw_data_y
     else:
+        shuffle(draw_data_x) if SETTINGS['shuffle'] else False
         return draw_data_x
 
 @sio.on('lobbyPlayerDrawing')
@@ -235,10 +237,10 @@ async def on_lobbyPlayerDrawing(data):
     """
     if data == GAME_DATA["myID"]:
         print("My Time Has Come")
-        img = await dither(GAME_DATA['word'])           # Image Dither
-        for line in image_optimize(img, 3, 5):          # Optimization for fast draw here, 3 and 5 are sizes of pixels for x drawing and y drawing, changing them u can make image bigger or smaller
-            if line[0][1] != 0:                         # We loop through image
-                await sio.emit('drawCommands', line)    # Draw line
+        img = await dither(GAME_DATA['word'])                           # Image Dither
+        for line in image_optimize(img, SETTINGS['x'], SETTINGS['y']):  # Optimization for fast draw here, 3 and 5 are sizes of pixels for x drawing and y drawing, changing them u can make image bigger or smaller
+            if line[0][1] != 0:                                         # We loop through image
+                await sio.emit('drawCommands', line)                    # Draw line
 
 async def keep_alive():
     """
