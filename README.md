@@ -59,5 +59,8 @@ Also because of how socketio work, if you want your bot to auto-reconnect you ca
 - Using line optimization and cluster dot dithering
 ![Example4](resources/EXAMPLE4.png)
 
+## Warning!
+`This code is published for educational purposes ONLY, I have no responsibility for how this code will be used, all responsibility lies on YOU. Please just don't be a FREAK. gl hf`
+
 ## License
 [MIT](https://github.com/DEgiTx/rats-search/blob/master/LICENSE)
