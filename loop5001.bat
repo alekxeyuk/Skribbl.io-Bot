@@ -1,5 +1,5 @@
 :loop
 
-python succ.py 5001
+python draw_bot.py 5001
 
 goto loop
