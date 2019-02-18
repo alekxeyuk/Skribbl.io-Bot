@@ -20,6 +20,7 @@ We are welcome any contributing: bug fixes, improvements, code refactoring and o
 ## Dependencies
 - `Python 3.4` or higher
 - `Asyncio`
+- `aiohttp` [aiohttp](https://github.com/aio-libs/aiohttp/)
 - `socketio` [python-socketio](https://github.com/miguelgrinberg/python-socketio)
 - `requests` [requests](https://github.com/kennethreitz/requests)
 - `hitherdither` [hitherdither](https://github.com/hbldh/hitherdither)
