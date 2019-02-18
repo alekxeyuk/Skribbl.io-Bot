@@ -90,7 +90,7 @@ async def on_lobbyConnected(data):
     """
     await sio.emit("chat", "Hello, I’m an auto-drawing bot written in Python + Websockets, I can draw 150x120 image's in ~ 5-30")
     await sio.emit("chat", "seconds, so please be patient. My owner is user 'HALL V2'")
-    await sio.emit("chat", "If you want this bot, it is released on https://github.com/alekxeyuk/Skribbl.io-Bot")
+    await sio.emit("chat", "If you want this bot, it is released on github,com/alekxeyuk/Skribbl,io-Bot")
 
 @sio.on('lobbyState')
 def on_lobbyState(data):
