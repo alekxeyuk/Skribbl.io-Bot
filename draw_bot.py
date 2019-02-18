@@ -9,7 +9,7 @@ import hitherdither
 from io import BytesIO
 from random import choice, randint
 from PIL import Image, ImageDraw, ImageFont
-from google_images_download import google_images_download
+import google_images_download
 
 SETTINGS = {'port': '5002', 'join': '', 'language': 'English'}
 
